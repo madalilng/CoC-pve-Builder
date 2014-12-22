@@ -7,4 +7,4 @@ known issue:
 
 no level select of buildings.
 
-all buildings including wall stuck @ level 7.
+all buildings including wall generated @ level 7.
