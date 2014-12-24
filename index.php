@@ -3,7 +3,6 @@
 	<title>Clash of Clans PVE Builder</title>
 	<script src="scripts/jquery-and-jquery.tools.min.js"></script>
 	<script src="scripts/jquery-ui-1.9.2.custom.min.js"></script>
-	<link href="scripts/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" type="text/css" />
 	<link href="builder.css" rel="stylesheet" type="text/css" />
 </head>
 <body oncontextmenu="return false;">
@@ -19,13 +18,29 @@
 <div id="toolOptions">
 	<div id="toggleDelete" class="optionsButton noSelect">Erase Mode</div>
 	<div id="togglePerimeter" class="optionsButton noSelect">Toggle Perimeter</div>
+	<div id="toggleLevel" class="optionsButton noSelect">Toggle Level</div>
 	<div id="saveBase" class="optionsButton noSelect">Export</div>
+	<div id="baseLevel">
+	<select id="wallLevelSelect">
+			<option value="11" selected>Wall level 11</option>
+			<option value="10">Wall level 10</option>
+			<option value="9" >Wall level 9</option>
+			<option value="8" >Wall level 8</option>
+			<option value="7" >Wall level 7</option>
+			<option value="6" >Wall level 6</option>
+			<option value="5" >Wall level 5</option>
+			<option value="4" >Wall level 4</option>
+			<option value="3" >Wall level 3</option>
+			<option value="2" >Wall level 2</option>
+			<option value="1" >Wall level 1</option>
+	</select>
+	</div>
 	<br><br>
-	<div id="#" class="buildingButton" onclick="createObject('1000008', 3, 3, '158_10', '0', 1);"><img src="assets/builder/objects/158_1.png" width="50" height="50"></div>
-	<div id="#" class="buildingButton" onclick="createObject('1000009', 3, 3, '159_10', '0', 1);"><img src="assets/builder/objects/159_1.png" width="50" height="50"></div>
-	<div id="#" class="buildingButton" onclick="createObject('1000013', 3, 3, '160_7', '0', 1);"><img src="assets/builder/objects/160_1.png" width="50" height="50"></div>
-	<div id="#" class="buildingButton" onclick="createObject('1000012', 3, 3, '161_7', '0', 1);"><img src="assets/builder/objects/161_1.png" width="50" height="50"></div>
-	<div id="#" class="buildingButton" onclick="createObject('1000011', 3, 3, '162_7', '0', 1);"><img src="assets/builder/objects/162_1.png" width="50" height="50"></div>
+	<div id="#" class="buildingButton" ><img id="canonT" onclick="createObject('1000008-12', 3, 3, '158_12', '0', 1);" src="assets/builder/objects/158_12.png" width="50" height="50"></div>
+	<div id="#" class="buildingButton" ><img id="archerT" onclick="createObject('1000009-13', 3, 3, '159_13', '0', 1);" src="assets/builder/objects/159_13.png" width="50" height="50"></div>
+	<div id="#" class="buildingButton" ><img id="mortarT" onclick="createObject('1000013-8', 3, 3, '160_8', '0', 1);" src="assets/builder/objects/160_8.png" width="50" height="50"></div>
+	<div id="#" class="buildingButton" ><img id="airT" onclick="createObject('1000012-8', 3, 3, '161_8', '0', 1);" src="assets/builder/objects/161_8.png" width="50" height="50"></div>
+	<div id="#" class="buildingButton" ><img id="wizardT" onclick="createObject('1000011-8', 3, 3, '162_8', '0', 1);" src="assets/builder/objects/162_8.png" width="50" height="50"></div>
 	<br><br><br><br>
 	</div>
 <!-- INFOLINKS_ON -->
@@ -33,9 +48,6 @@
 	<div class="toolWindowWrapper">
 		<div class="windowLeft"></div><div class="windowRight"></div>
 	</div>
-	<!-- INFOLINKS_OFF -->
-	
-	<!-- Grid -->
 	<div id="objects"></div>
 	<div id="stage"></div>
 	<div class="gridHouseWrapper">
@@ -1497,7 +1509,6 @@
 	var newBase         = 1;
 	var loadingDelay    = 7000;
 	var canEdit         = 1;
-	var wallName        = '166_11';
 	var hideWallCount   = 0;
 	var isAttack        = false;
 	var maxDeployable   = 240; 

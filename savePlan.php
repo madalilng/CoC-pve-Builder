@@ -11,8 +11,8 @@ if(isset($_POST['objCoor']) && isset($_POST['wallCoor'])){
 	//Wall
 	for($i = 0 ; $i < 36 ; $i++){
 		for($x = 0 ; $x < 36 ; $x++){
-			if($json_a["g-".$i."-".$x.""] == "1"){
-				$wdata = $wdata . ($objecCount == 0 ? "" : ",") . "{\"data\":1000010,\"lvl\":7,\"x\":".($i+4).",\"y\":".(40-$x)."}";
+			if($json_a["g-".$i."-".$x.""] >0){
+				$wdata = $wdata . ($objecCount == 0 ? "" : ",") . "{\"data\":1000010,\"lvl\":".($json_a["g-".$i."-".$x.""]-1).",\"x\":".($i+4).",\"y\":".(40-$x)."}";
 				$objecCount++;
 			}
 		}
@@ -31,7 +31,7 @@ if(isset($_POST['objCoor']) && isset($_POST['wallCoor'])){
 			if($objType[0] == "1000001"){ // townhall
 				$wdata = $wdata . ($objecCount == 0 ? "" : ",") . '{"data":' . $objType[0] . ',"lvl":9,"x":' . ($objPos[0]+4) . ',"y":' . (37-$objPos[1]) . "}";
 			}else{
-				$wdata = $wdata . ($objecCount == 0 ? "" : ",") . '{"data":' . $objType[0] . ',"lvl":9,"x":' . ($objPos[0]+4) . ',"y":' . (38-$objPos[1]) . "}";
+				$wdata = $wdata . ($objecCount == 0 ? "" : ",") . '{"data":' . $objType[0] . ',"lvl":'.($objType[1]-1).',"x":' . ($objPos[0]+4) . ',"y":' . (38-$objPos[1]) . "}";
 			}
 			$objecCount++;
 		}
