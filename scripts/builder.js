@@ -180,10 +180,6 @@ $(window).bind("load", function() {
 						currentObjects[currentDraggedObject][0] = objectDestination;
 						mapGridUnderObject(currentDraggedObject, objectDestination, width, height, true);
 						
-						// remove base level selection
-						if (modifications == 0 && newBase) {						
-							$('#baseLevel').fadeOut(1500, "linear");
-						}
 						// update modification count
 						modifications = modifications + 1;
 					} else {
@@ -233,41 +229,17 @@ $(window).bind("load", function() {
 						
 						imageName = imageName.split('/').pop().replace(replacement,'');
 						imageName = imageName.replace('.png', '');						
-						
-						if (imageName != wallName) {
+						imagePng = imageName.split('_');
+						if (imagePng[0] != "166") {
 							updateWalls(1, elementName);
 						} else {
+							//alert(imageName);
 							updateWalls(2, elementName);
 						}
 					}
 				});
 			});
 		}
-		
-		function gridActions(element, mouseX, mouseY) {
-			
-			var offset = element.offset();
-			var width  = element.width();
-			var height = element.height();
-			
-			if (mouseX > offset.left && mouseX < offset.left + width && mouseY > offset.top && mouseY < offset.top + height) {
-				
-				var elementName = element.attr('id');				
-				var imageName = element.css("background-image");
-				
-				var replacement = /\"|\'|\)/g;
-				
-				imageName = imageName.split('/').pop().replace(replacement,'');
-				imageName = imageName.replace('.png', '');
-
-				if (imageName != wallName) {
-					updateWalls(1, elementName);
-				} else {
-					updateWalls(2, elementName);
-				}
-			}
-		}
-		
 		// creates the objects but does not place them
 		var NotSame = 0;
 		 window.createObject = function (name, width, height, image, range, perimeter) {
@@ -330,10 +302,6 @@ $(window).bind("load", function() {
 			
 			// update wall count
 			updateWalls(0, 0);
-			
-			if (newBase) {
-				$('#baseLevel').delay(2000).fadeIn(2000, "linear");
-			}
 		}
 		
 		function updateWalls(type, elementName) {
@@ -348,9 +316,9 @@ $(window).bind("load", function() {
 				} else if (type == 2 && (!placeWalls || placeWalls == null) && deleteToggle) {
 										
 					if (jQuery.inArray(elementName, grayWallArray) != -1) {
-						$('#' + elementName).css("background-image", "url(builder/tile_background_gray.png)");	
+						$('#' + elementName).css("background-image", "url(themes/default/images/tile_background_gray.png)");	
 					} else if (jQuery.inArray(elementName, blueWallArray) != -1) {
-						$('#' + elementName).css("background-image", "url(builder/tile_background_blue.png)");				
+						$('#' + elementName).css("background-image", "url(themes/default/images/tile_background_blue.png)");				
 					} else {
 						$('#' + elementName).css("background-image", "none");
 					}
