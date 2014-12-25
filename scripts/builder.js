@@ -144,15 +144,16 @@ $(window).bind("load", function() {
 				// setup snapping coordinates
 				var originCoordinates = $('#objects').position();
 				var elementPos = $('#' + currentDraggedObject).position();
+				var buildingNo = currentDraggedObject.split('-')[0];
 				//console.log($('#objects').position());
 				
 				buildingMovement = false;
 				
-				if(deleteToggle){ //renpogi
+				if(deleteToggle && buildingNo != "1000001"){ //renpogi not TH
 					mapGridUnderObject(currentDraggedObject, "g-2-17", 0, 0, true);
 					$('#' + currentDraggedObject).css("background-image", "none");
-						delete currentObjects[currentDraggedObject]; 
-						delete objectCoordinates[currentDraggedObject];
+					delete currentObjects[currentDraggedObject]; 
+					delete objectCoordinates[currentDraggedObject];
 				}else if (elementPos) {
 
 					var elementTop = (Math.round(elementPos.top / gridSize) * gridSize) + originCoordinates.top;
