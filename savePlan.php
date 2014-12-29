@@ -27,7 +27,12 @@ if(isset($_POST['objCoor']) && isset($_POST['wallCoor'])){
 			$objType = explode("-",$objType);
 			$objPos = str_replace("g-","",$objs[1]);
 			$objPos = explode("-",$objPos);
-			$wdata = $wdata . ($objecCount == 0 ? "" : ",") . '{"data":' . $objType[0] . ',"lvl":'.($objType[1]-1).',"x":' . ($objPos[0]+4) . ',"y":' . ((41-$objType[2])-$objPos[1]) . "}";
+			//echo $objPos[0] . " - ". $objPos[1];
+			if($objType[0] == "1000001"){ // townhall
+				$wdata = $wdata . ($objecCount == 0 ? "" : ",") . '{"data":' . $objType[0] . ',"lvl":9,"x":' . ($objPos[0]+4) . ',"y":' . (37-$objPos[1]) . "}";
+			}else{
+				$wdata = $wdata . ($objecCount == 0 ? "" : ",") . '{"data":' . $objType[0] . ',"lvl":'.($objType[1]-1).',"x":' . ($objPos[0]+4) . ',"y":' . (38-$objPos[1]) . "}";
+			}
 			$objecCount++;
 		}
 	}
