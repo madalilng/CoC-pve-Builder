@@ -19,59 +19,12 @@ $('#toggleDelete').click(function() {
 		deleteToggle = false;
 	}
 });
-
-var _levels = [12,13,8,8,8];
-var _towers = ["158","159","160","161","162"];
-var _towerId = ['canonT','archerT','mortarT','airT','wizardT'];
-var _towerRid = ['1000008','1000009','1000013','1000012','1000011'];
-var ToggleLevel = false;
-$('#toggleLevel').click(function() {
-	if (!ToggleLevel) {
-		$('#toggleLevel').addClass('toggleOn');
-		document.getElementById(_towerId[0]).onclick = function() { ChangeLevel(0) };
-		document.getElementById(_towerId[1]).onclick = function() { ChangeLevel(1) };
-		document.getElementById(_towerId[2]).onclick = function() { ChangeLevel(2) };
-		document.getElementById(_towerId[3]).onclick = function() { ChangeLevel(3) };
-		document.getElementById(_towerId[4]).onclick = function() { ChangeLevel(4) };
-		ToggleLevel = true;
-	} else {
-		$('#toggleLevel').removeClass('toggleOn');
-		document.getElementById(_towerId[0]).onclick = function(){ createObject(_towerRid[0] + '-' + _levels[0], 3, 3,_towers[0] + '_' + _levels[0], '0', 1); } ;
-		document.getElementById(_towerId[1]).onclick = function(){ createObject(_towerRid[1] + '-' + _levels[1], 3, 3,_towers[1] + '_' + _levels[1], '0', 1); } ;
-		document.getElementById(_towerId[2]).onclick = function(){ createObject(_towerRid[2] + '-' + _levels[2], 3, 3,_towers[2] + '_' + _levels[2], '0', 1); } ;
-		document.getElementById(_towerId[3]).onclick = function(){ createObject(_towerRid[3] + '-' + _levels[3], 3, 3,_towers[3] + '_' + _levels[3], '0', 1); } ;
-		document.getElementById(_towerId[4]).onclick = function(){ createObject(_towerRid[4] + '-' + _levels[4], 3, 3,_towers[4] + '_' + _levels[4], '0', 1); } ;
-		ToggleLevel = false;
-	}
-});
-
 function ChangeLevel(t) {
-	switch(t){
-	case 0:
-		if(_levels[t] == 12)
-			_levels[t] = 1;
-		else
-			_levels[t]++;
-		break;
-	case 1:
-		if(_levels[t] == 13)
-			_levels[t] = 1;
-		else
-			_levels[t]++;
-		break;
-		
-	default:
-		if(_levels[t] == 8)
-			_levels[t] = 1;
-		else
-			_levels[t]++;
-		break;
-	}
-	
+	if(_levels[t] == _MAXlevels[t] )
+		_levels[t] = 1;
+	_levels[t]++;
 	document.getElementById(_towerId[t]).src = src="assets/builder/objects/" + _towers[t] + "_" + _levels[t] + ".png";
 }
-
-
 $(window).bind("load", function() {
 	$(document).ready(function(){
 		
