@@ -77,8 +77,9 @@
 		<?php
 			for($i = 0 ; $i <= 35 ;$i++ ){
 				for($x = 0 ; $x<=39 ;$x++){
+					
 					?>
-					<div id="g-<?php echo $i; ?>-<?php echo $x; ?>" class="gridElement "></div>
+					<div id="g-<?php echo $i; ?>-<?php echo $x; ?>" class="gridElement <?php if ($i < 21 && $i > 18 && $x < 21 && $x > 18) { echo "grayGrid"; }?>"></div>
 					<?php
 				}
 			}
