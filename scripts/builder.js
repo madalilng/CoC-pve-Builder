@@ -249,7 +249,6 @@ $(window).bind("load", function() {
 				
 				$.each(jsonObject, function(name) {
 					$('#' + name).css("background-image", "url(assets/builder/objects/" + wallName + ".png)");
-					wallCount++;
 					wallCoordinates[name] = 1;
 				});
 			}

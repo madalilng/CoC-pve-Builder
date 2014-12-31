@@ -1,26 +1,43 @@
 <?php 
-	include "config.php";	
-	function js_str($s)
-	{
-		return '"' . addcslashes($s, "\0..\37\"\\") . '"';
-	}
-	
-	function js_int($s)
-	{
-		return addcslashes($s, "\0..\37\"\\");
-	}
-
-	function js_array($array)
-	{
-		$temp = array_map('js_str', $array);
-		return '[' . implode(',', $temp) . ']';
-	}
-	
-	function js_intarray($array)
-	{
-		$temp = array_map('js_int', $array);
-		return '[' . implode(',', $temp) . ']';
-	}
+	include "config.php";
+	$lobj = "loadObjectCoordinates('{";
+	$lwll = "loadWallCoordinates('{";
+	$objs = "";
+	$i = 0;
+	$w = 0;
+	if ($_SERVER["REQUEST_METHOD"] == "POST") {
+	   if (!empty($_POST["decrypt"])) {
+		$json_a = json_decode($_POST["decrypt"], true);
+		foreach($json_a['buildings'] as $v){
+			$id = $v['data'];
+			$data = _getInfo($id);
+			$lvl = $v['lvl']+1;
+			$img = $data[0];
+			$size = $data[1];
+			$x = $v['x']-3;
+			$y = 0;
+			
+			if ($id == "1000010"){
+				$y = (40-$v['y'])+2;
+			}elseif($id== "1000001"){
+				$y = (41-$v['y']-4);
+			}else{
+				$y = (41-$data[1]-$v['y']);
+			}
+			
+			if($id != "1000010"){
+				$objs = $objs. "createObject('".$id."-".$lvl."-".$size."', ".$size.", ".$size.", '".$data[0]."_".($lvl)."', '0', 1);";
+				$lobj = $lobj.($i == 0 ? "" : ",").'"'.$id.'-'.$lvl.'-'.$size.'-'.$i.'":"g-'.$x.'-'.($y+2).'"';
+				$i++;
+			}else{
+				$lwll = $lwll.($w == 0 ? "" : ",").'"g-'.$x.'-'.($y).'":1';
+				$w++;
+			}
+		}
+		$lobj = $lobj."}');";
+		$lwll = $lwll."}');";
+		}
+   }
 ?>
 <html>
 <head>
@@ -75,9 +92,8 @@
 	<div class="gridHouseWrapper">
 		<div id="gridHouse">
 		<?php
-			for($i = 0 ; $i <= 35 ;$i++ ){
+			for($i = 0 ; $i <= 39 ;$i++ ){
 				for($x = 0 ; $x<=39 ;$x++){
-					
 					?>
 					<div id="g-<?php echo $i; ?>-<?php echo $x; ?>" class="gridElement <?php if ($i < 21 && $i > 18 && $x < 21 && $x > 18) { echo "grayGrid"; }?>"></div>
 					<?php
@@ -143,9 +159,15 @@ $('#toggleLevel').click(function() {
 <script type="text/javascript" src="scripts/builder.js?v=2"></script>
 <script type="text/javascript">
 $(window).bind("load", function() {	
-	createObject('1000001-9-4', 4, 4, '187_10', '0', 1);
-	loadObjectCoordinates('{"1000001-9-4-0":"g-17-18"}');
-	loadWallCoordinates('');			
+	<?php if ($objs == "" ) {?>
+	createObject('1000001-10-4', 4, 4, '187_10', '0', 1);
+	loadObjectCoordinates('{"1000001-10-4-0":"g-17-18"}');
+	<?php }else{ ?>
+	<?php 
+		echo $objs;
+		echo $lobj;
+		echo $lwll;
+	}?>
 	fixMisplacedObjects();		
 });
 </script>

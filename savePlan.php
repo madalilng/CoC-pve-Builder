@@ -9,10 +9,10 @@ if(isset($_POST['objCoor']) && isset($_POST['wallCoor'])){
 	$wdata = "{\"buildings\":[";
 	$objecCount = 0;
 	//Wall
-	for($i = 0 ; $i < 36 ; $i++){
-		for($x = 0 ; $x < 36 ; $x++){
+	for($i = 0 ; $i < 41 ; $i++){
+		for($x = 0 ; $x < 41 ; $x++){
 			if($json_a["g-".$i."-".$x.""] >0){
-				$wdata = $wdata . ($objecCount == 0 ? "" : ",") . "{\"data\":1000010,\"lvl\":".($json_a["g-".$i."-".$x.""]-1).",\"x\":".($i+4).",\"y\":".(40-$x)."}";
+				$wdata = $wdata . ($objecCount == 0 ? "" : ",") . "{\"data\":1000010,\"lvl\":".($json_a["g-".$i."-".$x.""]-1).",\"x\":".($i+3).",\"y\":".((40-$x)+2)."}";
 				$objecCount++;
 			}
 		}
@@ -27,7 +27,7 @@ if(isset($_POST['objCoor']) && isset($_POST['wallCoor'])){
 			$objType = explode("-",$objType);
 			$objPos = str_replace("g-","",$objs[1]);
 			$objPos = explode("-",$objPos);
-			$wdata = $wdata . ($objecCount == 0 ? "" : ",") . '{"data":' . $objType[0] . ',"lvl":'.($objType[1]-1).',"x":' . ($objPos[0]+4) . ',"y":' . ((41-$objType[2])-$objPos[1]) . "}";
+			$wdata = $wdata . ($objecCount == 0 ? "" : ",") . '{"data":' . $objType[0] . ',"lvl":'.($objType[1]-1).',"x":' . ($objPos[0]+3) . ',"y":' . (((41-$objType[2])-$objPos[1])+2) . "}";
 			$objecCount++;
 		}
 	}
