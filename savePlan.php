@@ -27,7 +27,7 @@ if(isset($_POST['objCoor']) && isset($_POST['wallCoor'])){
 			$objType = explode("-",$objType);
 			$objPos = str_replace("g-","",$objs[1]);
 			$objPos = explode("-",$objPos);
-			$wdata = $wdata . ($objecCount == 0 ? "" : ",") . '{"data":' . $objType[0] . ',"lvl":'.($objType[1]-1).',"x":' . ($objPos[0]+3) . ',"y":' . (((41-$objType[2])-$objPos[1])+2) . "}";
+			$wdata = $wdata . ($objecCount == 0 ? "" : ",") . '{"data":' . $objType[0] . ',"lvl":'.($objType[1]-1).',"x":' . ($objPos[0]+3) . ',"y":' . (((41-$objType[2])-$objPos[1])+2) . ($objType[0] == "1000027" ? ",\"ammo\":750" : "") . ($objType[0] == "1000021" ? ",\"ammo\":1500" : ""). "}";
 			$objecCount++;
 		}
 	}
